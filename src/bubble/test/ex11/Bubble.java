@@ -1,4 +1,4 @@
-package bubble.test.ex10;
+package bubble.test.ex11;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -12,7 +12,8 @@ public class Bubble extends JLabel implements Moveable{
 
 	// 의존성 콤포지션
 	private Player player;
-
+	private BackgroundBubbleService backgroundBubbleService; 
+	
 	// 위치상태
 	private int x;
 	private int y;
@@ -52,6 +53,8 @@ public class Bubble extends JLabel implements Moveable{
 		bubble = new ImageIcon("image/bubble.png");
 		bubbled = new ImageIcon("image/bubbled.png");
 		bomb = new ImageIcon("image/bomb.png");
+		backgroundBubbleService = new BackgroundBubbleService(this);
+		
 	}
 
 	private void initSetting() {
@@ -75,6 +78,12 @@ public class Bubble extends JLabel implements Moveable{
 		for(int i= 0; i<400; i++) {
 			x--;
 			setLocation(x, y);
+			
+			//체크하면서 벽에 닿으면 for문 정지
+			if(backgroundBubbleService.leftWall()) {
+				break;
+			}
+			
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
@@ -90,6 +99,12 @@ public class Bubble extends JLabel implements Moveable{
 		for(int i= 0; i<400; i++) {
 			x++;
 			setLocation(x, y);
+			
+			if(backgroundBubbleService.rightWall()) {
+				break;
+			}
+			
+			
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
@@ -105,6 +120,11 @@ public class Bubble extends JLabel implements Moveable{
 		while(up) {
 			y--;
 			setLocation(x, y);
+			if(backgroundBubbleService.rightWall()) {
+				break;
+			}
+			
+			
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
