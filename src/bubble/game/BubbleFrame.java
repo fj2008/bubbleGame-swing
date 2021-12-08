@@ -1,13 +1,15 @@
-package bubble.test.ex16;
+package bubble.game;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import bubble.game.component.Enemy;
+import bubble.game.component.Player;
+import bubble.game.music.BGM;
 import lombok.Getter;
 import lombok.Setter;
 
